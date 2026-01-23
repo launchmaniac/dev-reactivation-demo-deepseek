@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Demo - AI Reactivation Campaign (DeepSeek)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Collapsible Config Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>AI Configuration</h2>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+
+        <div class="sidebar-content">
+            <div class="config-section">
+                <label for="businessName">Business Name (AI Contact)</label>
+                <input type="text" id="businessName" placeholder="e.g., ABC Heating & Cooling" value="ABC Heating & Cooling">
+            </div>
+
+            <div class="config-section">
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" placeholder="e.g., John" value="John">
+            </div>
+
+            <div class="config-section">
+                <label for="responseDelay">Response Delay (seconds)</label>
+                <input type="number" id="responseDelay" placeholder="e.g., 3" value="2" min="0" max="30" step="0.5">
+                <span class="config-hint">Simulates realistic typing time before AI responds</span>
+            </div>
+
+            <div class="config-section">
+                <label for="modelSelect">AI Model</label>
+                <select id="modelSelect">
+                    <option value="deepseek-chat">DeepSeek Chat (Recommended)</option>
+                    <option value="deepseek-reasoner">DeepSeek Reasoner (R1)</option>
+                </select>
+                <span class="config-hint">Chat = fast & capable, Reasoner = complex reasoning</span>
+            </div>
+
+            <div class="config-section">
+                <label for="systemMessage">System Message (AI Personality & Rules)</label>
+                <textarea id="systemMessage" rows="8" placeholder="Define how the AI should behave, its personality, tone, and rules...">You are a friendly SMS assistant for ABC Heating & Cooling, reaching out to past customers for a reactivation campaign.
+
+Your goal is to:
+- Be warm, professional, and concise (SMS style - short messages)
+- Remind them it's been a while since their last service
+- Offer a special discount for returning customers
+- Try to book an appointment
+
+Keep messages under 160 characters when possible. Be conversational, not salesy.</textarea>
+            </div>
+
+            <div class="config-section">
+                <label for="promptContext">Prompt / Context (Knowledge Base)</label>
+                <textarea id="promptContext" rows="6" placeholder="Add customer-specific details, services, pricing, current promotions...">Customer Info:
+- Last service: March 2024 (AC tune-up)
+- Equipment: Carrier central AC, installed 2019
+
+Current Promotions:
+- 15% off tune-ups for returning customers
+- Free inspection with any repair
+
+Available appointment slots this week:
+- Tuesday 2-4pm
+- Thursday 10am-12pm
+- Friday 1-3pm</textarea>
+            </div>
+
+            <div class="config-actions">
+                <button id="applyConfig" class="btn-primary">Apply & Start New Chat</button>
+                <button id="clearChat" class="btn-secondary">Clear Chat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Chat Interface -->
+    <div class="chat-wrapper">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <button class="menu-btn" id="openSidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="contact-info">
+                <div class="contact-avatar" id="contactAvatar">A</div>
+                <div class="contact-details">
+                    <div class="contact-name" id="contactName">ABC Heating & Cooling</div>
+                    <div class="contact-status">SMS</div>
+                </div>
+            </div>
+            <button class="reset-btn" id="resetChat" title="Start New Conversation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-date">Today</div>
+            <!-- Messages will be inserted here -->
+        </div>
+
+        <!-- Message Input -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input type="text" id="messageInput" placeholder="Text Message" autocomplete="off">
+                <button id="sendBtn" class="send-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
